@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .top{
+            width: 500px;
+            height: 50px;
+            padding-top: 100px;
+            padding-bottom: 20px;
+            display: flex;
+            margin: auto;
+            justify-content: space-between;
+
+        }
+        /*第一种方法 */
+/*         .top button{
+            width: 80px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            color: #ffffff;
+            background-color: blueviolet;
+        } */
+     
+
+        /* 第二种方法 */
+        .top img{
+            width: 80px;
+            height: 50px;
+        }
+
+        .wrap{
+            width: 500px;
+            height: 312px;
+            margin: auto;
+            background-color: brown;
+        }
+        .wrap img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="top">
+        <!--  第一种方法  -->
+<!--         <button>1号</button>
+        <button>2号</button>
+        <button>3号</button>
+        <button>4号</button>
+        <button>5号</button> -->
+
+        <!-- 第二种方法 -->
+        <img src="img/1.jpg">
+        <img src="img/2.jpg">
+        <img src="img/3.jpg">
+        <img src="img/4.jpg">
+        <img src="img/5.jpg">
+    </div>
+    <div class="wrap">
+        <img id="image" src="img/1.jpg" >
+    </div>
+
+    <script>
+
+        //第一种方法
+        /*    
+        var btns = document.getElementsByTagName("button");
+        var imgs = document.getElementById("image");
+
+        btns[0].onclick = function(){
+            imgs.src="img/1.jpg"
+        }
+        btns[1].onclick = function(){
+            imgs.src="img/2.jpg"
+        }
+        btns[2].onclick = function(){
+            imgs.src="img/3.jpg"
+        }
+        btns[3].onclick = function(){
+            imgs.src="img/4.jpg"
+        }
+        btns[4].onclick = function(){
+            imgs.src="img/5.jpg"
+        }
+        */
+        
+        //第二种方法
+        var imgs = document.getElementsByTagName("img");
+        console.log(imgs);
+        for(var i = 0; i<imgs.length-1; i++){
+            imgs[i].onclick = function () { 
+                imgs[5].src = this.src;
+            }
+        } 
+
+    </script>
+</body>
+</html>

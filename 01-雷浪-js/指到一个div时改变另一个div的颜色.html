@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 300px;
+            height: 100px;
+            border: 2px solid red;
+            margin: 100px auto;
+        }
+        /* .change{
+            background-color: blueviolet;
+        } */
+    </style>
+</head>
+<body>
+    <div></div>
+    <div></div>
+
+    <script>
+       var divs = document.getElementsByTagName("div");
+       
+     /*     divs[0].onclick = function(){
+            divs[0].className = "";
+            divs[1].className = "change";
+        }
+        divs[1].onclick = function(){
+            divs[1].className = "";
+            divs[0].className = "change";
+        } */
+
+
+        divs[0].onmouseover = function () { 
+            divs[1].style.backgroundColor = "green";
+        }
+        divs[0].onmouseout = function () { 
+            divs[1].style.backgroundColor = "";
+         }
+         divs[1].onmouseover = function () { 
+            divs[0].style.backgroundColor = "red";
+        }
+        divs[1].onmouseout = function () { 
+            divs[0].style.backgroundColor = "";
+         }
+
+
+    </script>
+</body>
+</html>

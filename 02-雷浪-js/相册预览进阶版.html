@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            background-color: darkcyan;
+        }
+        .wrap{
+            width: 1600px;
+            height: 500px;
+            margin:50px auto;
+            display: flex;
+            justify-content: space-between;
+        }
+        .wrap img:nth-child(1),
+        .wrap img:nth-child(5){
+            width: 200px;
+            height: 150px;
+            margin-top: 180px;
+            opacity: .3;
+            box-shadow: 0 0 10px rgb(17, 17, 17);
+        }
+        .wrap img:nth-child(2),
+        .wrap img:nth-child(4){
+            width: 300px;
+            height: 250px;
+            margin-top: 130px;
+            opacity: .7;
+            box-shadow: 0 0 10px rgb(17, 17, 17);
+        }
+        .wrap img:nth-child(3){
+            width: 500px;
+            height: 400px;
+            margin-top: 50px;
+            z-index: 999;
+            box-shadow: 0 0 20px rgb(17, 17, 17);
+            transition: 1s;
+        }
+        .wrap img:nth-child(3):hover{
+            transform: scale(1.2);
+            
+        }
+
+        .conc{
+            width: 300px;
+            height: 50px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+        }
+        .conc button{
+            width: 100px;
+            height: 50px;
+            background-color: cadetblue;
+            cursor: pointer;
+            outline: none;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <img src="img/1.jpg" alt="">
+        <img src="img/2.jpg" alt="">
+        <img src="img/3.jpg" alt="">
+        <img src="img/4.jpg" alt="">
+        <img src="img/5.jpg" alt="">
+    </div>
+    <div class="conc">
+        <button>上一个</button>
+        <button>下一个</button>
+    </div>
+
+    <script>
+        var imgs = document.getElementsByTagName("img");
+        var btns = document.getElementsByTagName("button");
+        var num = 4;
+
+        btns[0].onclick = function () { 
+            num--;
+            if(num < 0){
+                num = 4;
+            }
+            next();
+         }
+
+        btns[1].onclick = function () { 
+            num++;
+            if(num > 4){
+                num = 0;
+            }
+            next();
+         }
+
+
+         function next(){
+             if(num == 0){
+                 for(var i = 0; i<imgs.length; i++){
+                     var count = i + 2;
+                     if(i >= 4){
+                         count = i - 3;
+                     }
+                     imgs[i].src = "img/" + count + ".jpg";
+                 }
+                 /* imgs[0].src = "img/2.jpg";
+                 imgs[1].src = "img/3.jpg";
+                 imgs[2].src = "img/4.jpg";
+                 imgs[3].src = "img/5.jpg";
+                 imgs[4].src = "img/1.jpg";  */
+             }
+             if(num == 1){
+                for(var i = 0; i<imgs.length; i++){
+                     var count = i + 3;
+                     if(i >= 3){
+                         count = i - 2;
+                     }
+                     imgs[i].src = "img/" + count + ".jpg";
+                 }
+               /*  imgs[0].src = "img/3.jpg";
+                imgs[1].src = "img/4.jpg";
+                imgs[2].src = "img/5.jpg";
+                imgs[3].src = "img/1.jpg";
+                imgs[4].src = "img/2.jpg"; */
+             }
+             if(num == 2){
+                for(var i = 0; i<imgs.length; i++){
+                     var count = i + 4;
+                     if(i >= 2){
+                         count = i - 1;
+                     }
+                     imgs[i].src = "img/" + count + ".jpg";
+                 }
+              /*   imgs[0].src = "img/4.jpg";
+                imgs[1].src = "img/5.jpg";
+                imgs[2].src = "img/1.jpg";
+                imgs[3].src = "img/2.jpg";
+                imgs[4].src = "img/3.jpg"; */
+             }
+             if(num == 3){
+                for(var i = 0; i<imgs.length; i++){
+                     var count = i + 5;
+                     if(i >= 1){
+                         count = i;
+                     }
+                     imgs[i].src = "img/" + count + ".jpg";
+                 }
+               /*  imgs[0].src = "img/5.jpg";
+                imgs[1].src = "img/1.jpg";
+                imgs[2].src = "img/2.jpg";
+                imgs[3].src = "img/3.jpg";
+                imgs[4].src = "img/4.jpg"; */
+             }
+             if(num == 4){
+                for(var i = 0; i<imgs.length; i++){
+                     var count = i + 1;
+                     imgs[i].src = "img/" + count + ".jpg";
+                 }
+               /*  imgs[0].src = "img/1.jpg";
+                imgs[1].src = "img/2.jpg";
+                imgs[2].src = "img/3.jpg";
+                imgs[3].src = "img/4.jpg";
+                imgs[4].src = "img/5.jpg"; */
+             }
+         }
+    </script>
+</body>
+</html>
