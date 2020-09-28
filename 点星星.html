@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body style="background-color: #000000;">
+		<!-- 
+            1、鼠标点击 window
+            2、获取鼠标位置
+            3、创建img
+            4、设置 src
+            5、设置图片位置（图片定位，设置样式）
+            6、图片随机大小
+            7、插入body
+		 -->
+		<script type="text/javascript">
+			// 鼠标点击window
+			window.onclick=function(event){
+
+                event = event || window.event;
+				// 创建img
+				var img=document.createElement("img");
+				// 设置src
+				//setAttribute(属性名, 属性值) 给对象添加属性
+				img.setAttribute("src","timg.gif");
+				// 设置图片大小随机
+				var w=Math.random()*100+50;
+				img.setAttribute("height",w);
+				// 图片位置,绝对定位
+				img.style.position="absolute";
+			
+				img.style.left=(event.clientX-w/2)+"px";
+				img.style.top=(event.clientY-w/2)+"px";
+				
+				// 将图片插入body
+				document.body.appendChild(img);
+			}
+			
+		</script>
+	</body>
+</html>

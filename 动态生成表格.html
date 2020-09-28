@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+        form{
+            width: 800px;
+            padding: 50px;
+            border: 1px solid black;
+            margin: 20px auto;
+        }
+        table{
+            width: 800px;
+            margin: auto;
+            
+        }
+        thead{
+            font-weight: bold;
+        }
+        td{
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+        <label for="">姓名：</label><input type="text">
+        <label for="">科目：</label><input type="text">
+        <label for="">成绩：</label><input type="text">
+        <input type="reset" value="重置">
+        <input type="button" value="提交">
+    </form>
+    <table border="1" cellspacing="0">
+        <thead>
+            <td>姓名</td>
+            <td>科目</td>
+            <td>成绩</td>
+            <td>操作</td>
+        </thead>
+
+        <tbody>
+            <td>雷浪</td>
+            <td>语文</td>
+            <td>100</td>
+            <td><a href="javascript:;">删除</a></td>
+        </tbody>
+    </table>
+
+    <script>
+        var ipts = document.querySelectorAll("input");
+        var tbody = document.querySelector("tbody");
+
+        ipts[ipts.length-1].onclick = function(){
+            var tr = document.createElement("tr");
+            tr.innerHTML = "<td>" + ipts[0].value + "</td>"
+                            + "<td>" + ipts[1].value + "</td>"
+                            + "<td>" + ipts[2].value + "</td>"
+                            + "<td><a href='javascript:;'>删除</a></td>";
+            tbody.appendChild(tr);
+            ipts[0].value = ipts[1].value = ipts[2].value = "";
+            deleteData();
+        }
+        deleteData();
+        function deleteData(){
+            var allA = document.querySelectorAll("a");
+            for(var i=0 ; i<allA.length ; i++){
+                allA[i].onclick = function(){
+                    tbody.removeChild(this.parentNode.parentNode);
+                }
+            }
+        }
+
+        
+    </script>
+</body>
+</html>

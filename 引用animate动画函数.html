@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="animate.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .parent{
+            width: 200px;
+            height: 50px;
+            position: absolute;
+            
+            right: 50px;
+            overflow: hidden;
+           /*  left: 1600px; */
+        }
+        .parent1{
+            top: 100px;
+        }
+        .parent2{
+            top: 155px;
+        }
+        .parent3{
+            top: 210px;
+        }
+        .parent4{
+            top: 265px;
+        }
+        span{
+            display: block;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 20px;
+            color: #ffffff;
+            background-color: royalblue;
+            cursor: pointer;
+            position: absolute;
+            right: 0;
+        }
+        .child{
+            width: 150px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 20px;
+            color: #ffffff;
+            background-color: saddlebrown;
+            position: absolute;
+            left: 300px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="parent parent1">
+        <div class="child child1">问题反馈1</div>
+        <span>←</span>
+    </div>
+    <div class="parent parent2">
+        <div class="child child2">问题反馈2</div>
+        <span>←</span>
+    </div>
+    <div class="parent parent3">
+        <div class="child child3">问题反馈3</div>
+        <span>←</span>
+    </div>
+    <div class="parent parent4">
+        <div class="child child4">问题反馈4</div>
+        <span>←</span>
+    </div>
+
+    <script>
+        var span = document.querySelectorAll('span');
+        var child = document.querySelectorAll('.child');
+        console.log(span);
+
+        for(var i=0 ; i<span.length ; i++){
+            span[i].index = i;
+            span[i].addEventListener('mouseover', function(){
+                animate(child[this.index], 0, ()=>{
+                    this.innerHTML = '→';
+                });
+            });
+            span[i].addEventListener('mouseout', function(){
+                animate(child[this.index], 300, ()=>{
+                    this.innerHTML = '←';
+                });
+            });
+        }
+        
+
+    </script>
+</body>
+</html>

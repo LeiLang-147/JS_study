@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: #cccccc;
+        }
+        .wrap{
+            width: 500px;
+            height: 350px;
+            background-color: teal;
+            position: relative;
+            left: 200px;
+            top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap"></div>
+
+    <script>
+        var wrap = document.querySelector('.wrap');
+        wrap.addEventListener('mousedown', function(event){
+            var x = event.pageX - wrap.offsetLeft;
+            var y = event.pageY - wrap.offsetTop;
+
+
+            wrap.addEventListener('mousemove', move);
+
+            function move(event){
+                wrap.style.left = event.pageX - x + "px";
+                wrap.style.top = event.pageY - y + "px";
+            }
+
+
+            wrap.addEventListener('mouseup', function(event){
+                wrap.removeEventListener('mousemove', move);
+            });
+
+
+
+        });
+
+        
+
+        
+
+
+    </script>
+</body>
+</html>

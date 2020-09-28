@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>123456789</li>
+        <li>123456789</li>
+        <li>123456789</li>
+        <li>123456789</li>
+        <li>123456789</li>
+    </ul>
+
+    <script>
+        var ul = document.querySelector('ul');
+        var child = ul.children;
+        var length = ul.children.length;
+
+        var ul = addEventListener('click', function(e){
+            e = e || window.event;
+            for(var i=0 ; i<length ; i++){
+                child[i].style.backgroundColor = "";
+            }
+            e.target.style.backgroundColor = "pink";
+        })
+    </script>
+</body>
+</html>

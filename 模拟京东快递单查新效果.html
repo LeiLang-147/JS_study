@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .search{
+            width: 300px;
+            height: 200px;
+            margin-left: 100px;
+            margin-top: 200px;
+            padding: 10px;
+            background-color: #eeeeee;
+        }
+        .wrap{
+            width: 300px;
+            height: 40px;
+            position: relative;
+        }
+        .con{
+            width: 300px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 25px;
+            box-shadow: 0 5px 5px #999999;
+            background-color: #ffffff;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: none;
+        }
+        input{
+            width: 290px;
+            height: 20px;
+            margin-top: 10px;
+        }
+        .san{
+            width: 0px;
+            height: 0px;
+            border-top: 10px solid #ffffff;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            position: absolute;
+            left: 20px;
+            bottom: -20px;
+            display: none;
+        } 
+        p{
+            font-size: 12px;
+            margin-top: 5px;
+            color: #aaaaaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="search">
+        <div class="wrap">
+            <div class="con"></div>
+            <div class="san"></div>
+        </div>
+        
+        <input type="text" placeholder="请输入您的快递单号" class="jd">
+        <p>按下s快速查找</p>
+    </div>
+
+    <script>
+        //快递单号输入内容时，上面大号字体盒子（con）显示（这里面的字号更大）
+        //表单检验用户输入：给表单添加键盘事件
+        //同时把快递单号里面的值获取过来赋值给con盒子（innerText）作为内容
+        //如果快递单号里面内容为空，则隐藏大号字体盒子（con）盒子
+        var ipt = document.querySelector('.jd');
+        var con = document.querySelector(".con");
+        var san = document.querySelector(".san");
+        document.addEventListener('keyup' , function(e){
+            e = e || window.event;
+            if(e.keyCode == 83){
+                ipt.focus();
+            }
+        });
+        ipt.addEventListener('keyup', function(e){
+            if(this.value == ""){
+                con.style.display = "none";
+                san.style.display = "none";
+            }else{
+                con.style.display = "block";
+                san.style.display = "block";
+                con.innerText = this.value;
+            }
+        });
+        ipt.addEventListener('blur', function(e){
+            e = e || window.event;
+            con.style.display = "none";
+            san.style.display = "none";
+        });
+        ipt.addEventListener('focus', function(e){
+            e = e || window.event;
+            if(this.value != ''){
+                con.style.display = "block";
+                san.style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>

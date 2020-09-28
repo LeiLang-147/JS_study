@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title> - 凯迪老师 </title>
+    <meta name='keywords' content=''>
+    <meta name='description' content=''>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+        li{list-style: none;}
+        #box{
+            height:550px;
+            padding-top:30px;
+            width:100%;
+            background: -webkit-linear-gradient(top,#8DC1DD,#F7A888);
+
+        }
+        #box .content{
+            width:1000px;
+            height:550px;
+            margin:auto;
+        }
+        #box .content .left,#box .content .right{
+            float: left;
+            width:450px;
+            height:450px;
+            padding:100px 0 0 50px;
+
+        }
+        #box .content .left{
+            background: #fff;
+        }
+        #box .content .right{
+            background: rgba(0,0,0,.5);
+        }
+        #box .left .top{
+            color:#F5A63A;
+        }
+        #box .left .area{
+            font-size:14px;
+            cursor: pointer;
+        }
+        #box .left .area:hover{
+            color:#F5A63A;
+        }
+
+        #box .left ul{
+            margin-left:15px;
+        }
+        #box .left ul li, #box .right ul li{
+            margin:5px;
+            float: left;
+            height:30px;
+            font-size:14px;
+            line-height: 30px;
+            text-align: center;
+            padding:0 5px;
+            border:1px solid #888;
+        }
+        #box .left ul li span {
+            padding: 0 8px;
+            cursor: pointer;
+        }
+        #box .right ul li{
+            color:#fff;
+        }
+    </style>
+</head>
+<body>
+
+<div id="box">
+    <div class="content">
+        <div class="left">
+            <p>
+                <span class="top">热门目的地：</span>
+                <span class="area">马来西亚</span>
+                <span class="area">泰国</span>
+                <span class="area">新西兰</span>
+                <span class="area">三亚</span>
+                <span class="area">云南</span>
+            </p>
+            <ul>
+                <!--<li>马来西亚 |<span>X</span></li>-->
+                <!--<li>马来西亚 |<span>X</span></li>-->
+                <!--<li>马来西亚 |<span>X</span></li>-->
+            </ul>
+        </div>
+        <div class="right">
+            <ul>
+                <!--<li>马来西亚</li>-->
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    var areas = document.querySelectorAll('.area');
+    var ul_left = document.querySelector('.left>ul');
+    var ul_right = document.querySelector('.right>ul');
+
+
+    for(var i=0 ; i<areas.length ; i++){
+        areas[i].index = i;
+        areas[i].mark = false;
+        
+        areas[i].addEventListener("click", fn);
+    }
+
+
+
+    function fn() {
+
+        if(!this.mark){
+            var li_left = document.createElement("li");
+            var li_right = document.createElement("li");
+            var span = document.createElement('span');
+
+            li_left.innerHTML = this.innerHTML + " |";
+            li_right.innerHTML = this.innerHTML;
+            span.innerHTML = "x";
+
+            span.addEventListener('click', () => {
+                ul_left.removeChild(li_left);
+                ul_right.removeChild(li_right);
+
+                this.mark = false;
+            });
+
+            li_left.appendChild(span);
+            ul_left.appendChild(li_left);
+            ul_right.appendChild(li_right);
+
+            this.mark = !this.mark;
+        }
+    }
+
+
+
+</script>
+
+
+
+</body>
+</html>

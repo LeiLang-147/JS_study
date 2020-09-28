@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: darkcyan;
+        }
+        .nav{
+            width: 800px;
+            height: 50px;
+            background-color: darkorchid;
+            margin: 100px auto;
+            box-shadow: 0 6px 10px pink;
+            position: relative;
+            z-index: 1;
+        }
+        ul{
+            list-style: none;
+            z-index: 2;
+        }
+        li{
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            float: left;
+            background-color:white;
+            position: relative;
+            z-index: 3;
+            opacity: .5;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        li:hover{
+            color: red;
+        }
+        
+        .current{
+            color: red;
+        }
+        .cloud{
+            width: 100px;
+            height: 30px;
+            display: block;
+            background-color: blue;
+            z-index: 3;
+            border-radius: 20px;
+            position: absolute;
+            top: 10px;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <span class="cloud"></span>
+        <ul>
+            <li class="current">首页新闻</li>
+            <li>师资力量</li>
+            <li>活动策划</li>
+            <li>企业文化</li>
+            <li>招聘信息</li>
+            <li>公司简介</li>
+            <li>我是佩奇</li>
+            <li>啥是佩奇</li>
+        </ul>
+    </div>
+
+    <script src="animate.js"></script>
+    <script>
+        var cloud = document.querySelector('.cloud');
+        var lis = document.querySelectorAll('li');
+        var Current = 0;
+        for(var i=0 ; i<lis.length ; i++){
+            lis[i].addEventListener('mouseenter', function(){
+                animate(cloud, this.offsetLeft);
+            });
+            lis[i].addEventListener('mouseleave', function(){
+                animate(cloud, Current);
+            });
+
+            lis[i].addEventListener('click', function(){
+                for(var j=0 ; j<lis.length ; j++){
+                    lis[j].className = '';
+                }
+                this.className = 'current';
+                Current = this.offsetLeft;
+            });
+        }
+
+
+    </script>
+</body>
+</html>

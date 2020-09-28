@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            height: auto;
+            width: 800px;
+            background-color: orange;
+            margin: 0 auto;
+        }
+        h1{
+            text-align: center;
+        }
+        ul{
+            list-style: none;
+        }
+        li{
+            background-color: yellow;
+            margin: 5px 0;
+            padding-left: 15px;
+            font-size: 22px;
+            cursor: pointer;
+        }
+        li>a{
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>微博发表区域</h1>
+        <textarea cols="50" rows="5"></textarea>
+        <button>点击发表</button>
+        <ul>
+
+        </ul>
+    </div>
+
+    <script>
+        window.onload = function(){
+            var btn = document.querySelector("button");
+            var txt = document.querySelector("textarea");
+            var uu = document.querySelector("ul");
+
+            btn.onclick = function () { 
+                if(txt.value == ""){
+                    alert("不能发送空内容！");
+                    return false;
+                }else{
+                    var cLi = document.createElement("li");
+                    cLi.innerHTML = txt.value + "<a href='javascript:;'>delete</a>";
+                    if(uu.children.length == 0){
+                        uu.appendChild(cLi);
+                    }else{
+                        uu.insertBefore(cLi, uu.children[0]);
+                    }
+                }
+                txt.value = "";
+
+
+
+
+                //删除功能
+                var allA = document.querySelectorAll("a");
+                for(var i=0 ; i<allA.length ; i++){
+                    allA[i].onclick = function () {  
+                        var res = confirm("确认删除吗？");
+                        if(res){
+                            uu.removeChild(this.parentNode);
+                        }
+                    }
+                }
+
+
+
+                //鼠标经过高亮显示效果
+                var allLi = document.querySelectorAll("li");
+                for(var j=0 ; j<allLi.length ; j++){
+                    allLi[j].onmouseover = function () {
+                        for(var k=0 ; k<allLi.length ; k++){
+                            allLi[k].style.backgroundColor = "";
+                        }
+                        this.style.backgroundColor = "purple";
+                    }
+                    allLi[j].onmouseout = function (){
+                        this.style.backgroundColor = "yellow";
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

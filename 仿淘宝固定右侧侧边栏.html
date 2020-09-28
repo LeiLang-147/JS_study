@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .nav{
+
+            width: 120px;
+            height: 300px;
+            position: absolute;
+            top: 350px;
+            right: 100px;
+            background-color: teal;
+        }
+        .nav>span{
+            display: block;
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            background-color: turquoise;
+            cursor: pointer;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            display: none;
+        }
+        header{
+            width: 1200px;
+            height: 150px;
+            background-color: tomato;
+            margin: auto;
+        }
+        .banner{
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .content{
+            width: 1200px;
+            height: 500px;
+            margin: auto;
+            background-color:violet;
+        }
+        footer{
+            width: 1200px;
+            height: 2200px;
+            background-color: tomato;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <span class="goBack">返回顶部</span>
+    </div>
+    <header></header>
+    <div class="banner">
+        <div class="content"></div>
+    </div>
+    
+    <footer></footer>
+
+    <script>
+        var nav = document.querySelector('.nav');
+        var banner = document.querySelector('.banner');
+        var footer = document.querySelector('footer');
+        var goBack = document.querySelector('.goBack');
+        var navTap = nav.offsetTop - banner.offsetTop;
+        var footerTop = footer.offsetTop;
+
+
+        document.addEventListener('scroll', function(){
+            //window.pageYOffset 页面被卷去的头部 IE9以上
+            //console.log(window.pageYOffset);
+            if(getScroll().top >= navTap){
+                nav.style.position = 'fixed';
+                nav.style.top = navTap + 'px';
+            }else{
+                nav.style.position = 'absolute';
+                nav.style.top = '350px';
+            }
+
+            if(getScroll().top >= footerTop){
+                goBack.style.display = 'block';
+            }else{
+                goBack.style.display = 'none';
+            }
+        })
+
+        //点击返回顶部模块，让窗口返回页面顶部
+        goBack.addEventListener('click', function(){
+            //里面x和y不跟单位
+            //window.scroll(0,0);
+            animate(window, 0);
+        })
+
+
+        //element(要执行动画的元素)
+        //target(要移动到的目标位置)
+        //speed(移动的速度)
+        function animate(element, target, callback){
+            clearInterval(element.timer);
+            element.timer = setInterval(()=>{
+                if(window.pageYOffset == target){
+                    clearInterval(element.timer);
+                    callback && callback();
+                }
+                if((target - window.pageYOffset) > 0){
+                    element.speed = Math.ceil((target - window.pageYOffset) / 10);
+                }else{
+                    element.speed = Math.floor((target - window.pageYOffset) / 10);
+                }
+                //element.style.top = window.pageYOffset + element.speed + 'px';
+                window.scroll(0, (window.pageYOffset + element.speed));
+            },15);
+        }
+
+
+
+        function getScroll(){
+            return{
+                left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
+                top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+            };
+        }
+    </script>
+</body>
+</html>

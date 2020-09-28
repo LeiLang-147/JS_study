@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrap{
+            width: 300px;
+            height: 200px;
+            margin-top: 100px;
+            margin-left: 100px;
+            font-size: 20px;
+        }
+        .wrap > div{
+            width: 300px;
+            height: 50px;
+            margin-top: 30px;
+            line-height: 50px;
+            text-align: center;
+            display: flex;
+            justify-content: space-around;
+        }
+        .wrap > div > div{
+            width: 50px;
+            height: 50px;
+            color: beige;
+            font-size: 26px;
+            background-color: #666666;
+        }
+        span{
+            display: block;
+            width: 20px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        距离国庆节还有：
+        <div>
+            <div class="day"></div>
+            <span>天</span>
+            <div class="hour"></div>
+            <span>:</span>
+            <div class="minute"></div>
+            <span>:</span>
+            <div class="second"></div>
+        </div>
+        
+
+        <script>
+            var day = document.querySelector('.day');
+            var hour = document.querySelector('.hour');
+            var minute = document.querySelector('.minute');
+            var second = document.querySelector('.second');
+
+            var newDate = new Date('2020/10/1');
+            timeOut();
+            var timer = setInterval(timeOut,1000);
+
+
+            function timeOut(){
+                
+                var nowDate = new Date();
+                var dates = newDate - nowDate;
+                var d = zero(parseInt(dates/1000/60/60/24));
+                var h = zero(parseInt(dates/1000/60/60)%24);
+                var m = zero(parseInt(dates/1000/60)%60);
+                var s = zero(parseInt(dates/1000)%60);
+                day.innerHTML = d;
+                hour.innerHTML = h;
+                minute.innerHTML = m;
+                second.innerHTML = s;
+                if(d == "00" && h == "00" && m == "00" && s == "00"){
+                    clearInterval(timer);
+                    //alert("时间到了");
+                }
+            }
+
+            function zero(val){
+                /* if(val >= 10){
+                    return val + "";
+                }else{
+                    return "0" + val;
+                } */
+                return (val>=10) ? (val+"") : ("0"+val );
+            }
+        </script>
+    </div>
+</body>
+</html>

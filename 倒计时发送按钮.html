@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 500px;
+            height: 100px;
+            margin-top: 50px;
+            margin-left: 50px;
+        }
+        input{
+            width: 180px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        手机号：<input type="text"> <button >发送</button>
+    </div>
+
+    <script>
+        
+        var btn = document.querySelector('button');
+        var count = 10;
+        var timer = null;
+        
+        btn.addEventListener('click', function(){
+            this.disabled = true;
+            timeOut();
+            timer = setInterval(timeOut, 1000);
+        });
+
+        function timeOut(){
+            if(count == 1){
+                clearInterval(timer);
+                btn.disabled = false;
+                btn.innerHTML = "发送";
+                count = 10//重置定时器
+            }else{
+                count--;
+                btn.innerHTML = "还有" + count + "秒再次发送";
+            }
+        }
+
+        
+        
+    </script>
+</body>
+</html>
