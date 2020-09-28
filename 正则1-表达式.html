@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span{
+            color: #aaaaaa;
+            font-size: 14px;
+        }
+        .right{
+            color: green;
+        }
+        .wrong{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    username: <input type="text" class="uname" > &nbsp;<span>请输入用户名</span>
+
+    <script>
+        /* 
+            \d  匹配0-9之间的任意数字，相当于[0-9]
+            \D  匹配所有0-9以外的字符，相当于[^0-9]
+            \w  匹配任意的字母，数字和下划线，相当于[A-Za-z0-9_]
+            \W  匹配除了任意的字母，数字和下划线，相当于[^A-Za-z0-9_]
+            \s  匹配空格（包含换行符、制表符、空格符等），相当于[\t\r\n\v\f]
+            \S  匹配非空字符集，相当于[^\t\r\n\v\f]
+         */
+
+
+        //1.通过RegExp对象的构造函数创建
+        var regexp = new RegExp(/123/);
+        console.log(regexp);
+
+
+        //2.通过字面量创建
+        var regexp2 = /123/;
+        console.log(regexp2);
+
+
+        //3.test() 检测字符串是否符合正则表达式要求的规范
+        //正则表达式里面不需要加引号，不管是数字型还是字符型
+        //只要有123都输出true
+        console.log(regexp2.test("123"));//true
+        console.log(regexp2.test(123));//true
+        console.log(regexp2.test("abc"));//false
+
+
+        console.log("------------------------");
+        //正则表达式中的特殊字符 又叫元字符  ^   $   +   *
+
+
+        //边界符
+        //  ^ 表示匹配行首的文本（以谁开始）
+        var rg1 = /^abc/;
+        console.log(rg1.test("abc"));//true
+        console.log(rg1.test("abcd"));//true
+        console.log(rg1.test("aabcd"));//false
+        console.log("------------------------");
+
+        //  $ 表示匹配行尾的文本（以谁结束）
+        var rg2 = /^abc$/;//精确匹配，必须是abc这三个字母，开头和结尾
+        console.log(rg2.test("abc"));//true
+        console.log(rg2.test("abcd"));//false
+        console.log(rg2.test("aabcd"));//false
+        console.log(rg2.test("abcabc"));//false
+        console.log("------------------------");
+
+
+        //字符类：[]  表示有一系列字符可供选择，只要匹配到其中一个, 多选一
+
+        var rg3 = /[abc]/;//只有有a，或者有b，或者有c，都返回true
+        console.log(rg3.test("andy"));//true
+
+        var rg4 = /^[abc]$/;//只能是a，或者只能是b，或者只能是c，其中的一个字符，才返回true
+        console.log(rg4.test("andy"));//false
+        console.log(rg4.test("a"));//true
+        console.log(rg4.test("b"));//true
+        console.log(rg4.test("c"));//true
+        console.log("------------------------");
+
+        var rg5 = /^[a-z]$/;//只要是26个小写字母中的一个，就返回true
+        console.log(rg5.test("k"));//true
+        console.log(rg5.test("ls"));//false
+        console.log(rg5.test("A"));//false
+        console.log("------------------------");
+
+        //var rg9 = /[0-9]/; //匹配数字
+
+        var rg6 = /^[A-Z]$/;//只要是26个大写字母中的一个，就返回true
+        console.log(rg6.test("k"));//false
+        console.log(rg6.test("ls"));//false
+        console.log(rg6.test("A"));//true
+        console.log("------------------------");
+
+
+        var rg7 = /^[A-z]$/;//只要是字母中的一个，就返回true
+        console.log(rg7.test("k"));//true
+        console.log(rg7.test("ls"));//false
+        console.log(rg7.test("A"));//true
+        console.log("------------------------");
+
+
+        var rg7 = /abc/i;// i 忽略大小写
+        console.log(rg7.test("ABC"));//true
+        console.log(rg7.test("abc"));//true
+        console.log(rg7.test("A"));//false
+        console.log("------------------------");
+
+
+        var rg8 = /a/g;//g 全局搜索
+        console.log(rg8.test("ABC"));//false
+        console.log(rg8.test("abc"));//true
+        console.log(rg8.test("nhdhhifahinkl"));//true
+        console.log("------------------------");
+
+
+        var rg10 = /^[a-z0-9_-]$/i;
+        console.log(rg10.test("B"));
+        console.log("------------------------");
+
+
+
+        var rg11 = /^[^a-z0-9_-]$/; // []里面的 ^ ，表示取反，表示不能包含小写字母，不猛包含0-9的数字，不能包含_，不能包含-
+        console.log(rg11.test("a"));//false
+        console.log("------------------------");
+
+        //* + ? 
+        // * 表示可以出现零次或多次
+        var rg12 = /^a*$/;
+        console.log(rg12.test(""));//true
+        console.log(rg12.test("a"));//true
+        console.log(rg12.test("aaaaa"));//true
+        console.log("------------------------");
+
+        // + 表示可以出现1次或多次
+        var rg13 = /^a+$/;
+        console.log(rg13.test(""));//false
+        console.log(rg13.test("a"));//true
+        console.log(rg13.test("aaaaa"));//true
+        console.log("------------------------");
+
+        // + 表示可以出现0次或1次
+        var rg14 = /^a?$/;
+        console.log(rg14.test(""));//true
+        console.log(rg14.test("a"));//true
+        console.log(rg14.test("aaaaa"));//false
+        console.log("------------------------");
+
+
+
+        //{n}  {n,}  {n,m}
+        //{3} 重复三次才为true
+        var rg15 = /^a{3}$/;
+        console.log(rg15.test(""));//false
+        console.log(rg15.test("a"));//false
+        console.log(rg15.test("aaa"));//true
+        console.log(rg15.test("aaaaa"));//false
+        console.log(rg15.test("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));//false
+        console.log("------------------------");
+
+        //{3,} 大于等于3
+        var rg16 = /^a{3,}$/;
+        console.log(rg16.test(""));//false
+        console.log(rg16.test("a"));//false
+        console.log(rg16.test("aaa"));//true
+        console.log(rg16.test("aaaaa"));//true
+        console.log(rg16.test("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));//true
+        console.log("------------------------");
+
+        //{3,16} 大于等于3  并且  小于等于16
+        var rg17 = /^a{3,16}$/;
+        console.log(rg17.test(""));//false
+        console.log(rg17.test("a"));//false
+        console.log(rg17.test("aaa"));//true
+        console.log(rg17.test("aaaaa"));//true
+        console.log(rg17.test("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));//false
+        console.log("------------------------");
+
+
+
+        var regUname = /^[a-zA-Z0-9_-]{6,16}$/;
+        var uname = document.querySelector(".uname");
+        var span = document.querySelector("span");
+        uname.onblur = function(){
+            if(regUname.test(this.value)){
+                span.className = "right";
+                span.innerHTML = "正确"
+            }else{
+                span.className = "wrong";
+                span.innerHTML = "用户名格式错误"
+            }
+        }
+  
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

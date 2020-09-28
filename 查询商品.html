@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrap{
+            width: 700px;
+            margin: 100px auto;
+        }
+        .searchByPrice,
+        .searchByGoods{
+            padding: 10px 0;
+        }
+        .searchByPrice input{
+            width: 50px;
+        }
+        table{
+            margin: 10px auto;
+        }
+        th, td{
+            width: 200px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="title">
+            <div class="searchByPrice">
+                <label>按照价格查询</label>
+                <input type="text">
+                <label>-</label>
+                <input type="text">
+                <button>搜索</button>
+            </div>
+            <div class="searchByGoods">
+                <label>按照商品名称查询</label>
+                <input type="text">
+                <button>查询</button>
+            </div>
+        </div>
+        <div class="tab">
+            <table border="1" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>产品名称</th>
+                        <th>价格</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                  
+                </tbody>
+                
+            </table>
+        </div>
+    </div>
+
+    <script>
+        //利用新增数组方法操作数据
+        var data = [{
+            id: 1,
+            pname: '小米',
+            price: 3999
+        },{
+            id: 2,
+            pname: 'OPPO',
+            price: 999
+        },{
+            id: 3,
+            pname: '荣耀',
+            price: 1299
+        },{
+            id: 4,
+            pname: '华为',
+            price: 1999
+        }];
+
+        var tbody = document.querySelector("tbody");
+
+        //把数据渲染到页面
+        setData(data);
+
+        function setData(myData){
+            //先清空tbody的旧数据，再渲染新数据
+            tbody.innerHTML = "";
+            myData.forEach(function(val){
+                var tr = document.createElement("tr");
+                tr.innerHTML = '<td>' + val.id + '</td><td>' + val.pname + '</td><td>' + val.price + '</td>'
+                tbody.appendChild(tr);
+            })
+        }
+
+        //根据价格查询商品
+        var priceInput = document.querySelectorAll(".searchByPrice input");
+        var priceBtn = document.querySelector(".searchByPrice button");
+
+        priceBtn.addEventListener("click", function(){
+            var min = priceInput[0].value;
+            var max = priceInput[1].value;
+            var newData = data.filter(function(val){
+                return (val.price > min && val.price < max);
+            })
+            setData(newData);
+        })
+
+
+        //根据名称查询商品
+        var nameInput = document.querySelector(".searchByGoods input");
+        var nameBtn = document.querySelector(".searchByGoods button");
+        nameBtn.addEventListener("click", function(){
+            var goodsName = nameInput.value;
+            var newDate = [];
+            data.some(function(val, index){
+                if(val.pname == goodsName){
+                    newDate.push(val);
+                    return true; //some(),找到指定条件的元素就会返回true，不在继续迭代
+                }
+            })
+            setData(newDate);
+        })
+
+    </script>
+</body>
+</html>

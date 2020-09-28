@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrap{
+            width: 1000px;
+            margin: 100px auto;
+        }
+        textarea{
+            width: 1000px;
+            height: 300px;
+        }
+        .tijiao{
+            text-align: center;
+        }
+        .tijiao button{
+            width: 100px;
+            height: 30px;
+        }
+        .res{
+            width: 300px;
+            height: 100px;
+            border: 1px solid black;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div>
+            <textarea name="" id="message" ></textarea>
+        </div>
+        <div class="tijiao">
+            <button>提交</button>
+        </div>
+        <div class="res"></div>
+    </div>
+
+
+    <script>
+        //替换 replace()
+
+        var text = document.querySelector("textarea");
+        var btn = document.querySelector("button");
+        var res = document.querySelector(".res");
+
+        btn.onclick = function(){
+            res.innerHTML = text.value.replace(/激情|gay|傻逼/g, "**");
+        }
+
+
+
+
+
+    </script>
+    
+</body>
+</html>

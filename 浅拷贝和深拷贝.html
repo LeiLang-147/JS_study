@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //浅拷贝只是拷贝一层，更深 层次对象的只拷贝引用，如果修改其中一个，另一个也会改变
+        //深拷贝拷贝多层，每一级别的数据都会拷贝
+        var obj = {
+            id: 1,
+            name: "andy",
+            msg: {
+                age: 18
+            },
+            color: ["pink", "red"]
+        }
+
+        var o = {};
+
+
+
+        //浅拷贝  
+
+        for(var k in obj){
+            //  k是属性名    obj[k]是属性值
+            
+            o[k] = obj[k];
+        }
+
+        console.log(o); 
+        o.msg.age = 20;
+        console.log(obj);
+
+        console.log("-----------------");
+       
+
+        //es6中的浅拷贝
+        Object.assign(o, obj);
+
+        console.log(o);
+        o.msg.age = 20;
+        console.log(obj); //原数据改变
+
+        console.log("-----------------");
+
+        //深拷贝    
+        
+        //JSON的方式
+        /* var a = JSON.stringify(obj);
+        console.log(a); */
+        var b = JSON.parse( JSON.stringify(obj) );
+        console.log(b);
+        b.msg.age = 50;
+        console.log(obj);//原数据没变
+
+
+        console.log("-----------------");
+
+
+        //用递归的方式
+        //封装函数
+        var oo = {};
+        function deepCopy(newobj, oldobj){
+            for(var k in oldobj){
+                //判断属性值属于哪种数据类型
+                //1.获取属性值
+                var item = oldobj[k];
+
+                //2.判断这个值是否是数组
+                if(item instanceof Array){
+                    newobj[k] = [];
+                    deepCopy(newobj[k], item);
+
+                //3.判断这个值是否是对象
+                }else if(item instanceof Object){
+                    newobj[k] = {};
+                    deepCopy(newobj[k], item);
+                
+                //4.属于简单数据类型
+                }else{
+                    newobj[k] = item;
+                }
+            }
+        }
+
+        deepCopy(oo, obj);
+        console.log(oo);
+
+
+
+
+    </script>
+</body>
+</html>
