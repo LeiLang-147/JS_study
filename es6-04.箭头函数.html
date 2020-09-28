@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        //() => { }
+        //箭头函数不绑定this，箭头函数里面的this，指向的是函数定义位置上下文的this
+
+        const obj = {name: "张三"};
+        function fn(){
+            console.log(this);
+            return () => {
+                console.log(this);
+            }
+        }
+        fn()();
+        fn.call(obj)();
+
+
+
+        //面试题   
+        //对象不会产生作用域  对象中的this指向window
+
+        var age = 100;
+
+        var obj2 = {
+            age: 20,
+            say: () => {
+                console.log(this.age);
+            }
+        }
+        obj2.say(); //100
+        
+
+
+
+    </script>
+</body>
+</html>

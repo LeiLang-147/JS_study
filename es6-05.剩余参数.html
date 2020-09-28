@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        //函数的形参前加 ...     让传进来的实参保存在...后面形参的数组中
+        const sum = (...args) => {
+            var total = 0;
+            args.forEach((item) => {
+                total += item;
+            });
+            return total;
+        };
+
+        console.log(sum(20, 30));
+        console.log(sum(20, 30, 40));
+
+
+        //剩余参数与解构配合使用
+        let students = ["小明", "小红", "小刚"];
+        let[s1, ...s2] = students;
+        console.log(s1); //小明
+        console.log(s2);//["小红", "小刚"]
+
+    </script>
+</body>
+</html>

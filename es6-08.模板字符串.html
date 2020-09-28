@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+    <script>
+        //使用反引号定义 ` `
+        let name = `张三`;
+        console.log(name); //张三
+
+
+        //1.模板字符串中可以解析变量
+        let sayHello = `hello, my name is ${name}`;
+        console.log(sayHello); //hello, my name is 张三
+
+
+        //2.模板字符串中可以换行
+        let result = {
+            name: 'zhangsan',
+            age: 20,
+            sex: '男'
+        }
+        let html = `<div>
+            <span>${result.name}</span>
+            <span>${result.age}</span>
+            <span>${result.sex}</span>
+            </div>`;
+        document.querySelector("div").innerHTML = html;
+
+
+        //3.模板字符串中可以调用函数
+        const sayHi = function(){
+            return "哈哈哈 追不到我吧";
+        };
+        let greet = `${sayHi()} 嘻嘻嘻`;
+        console.log(greet); //哈哈哈 追不到我吧 嘻嘻嘻
+
+
+        //4.startsWith()  表示参数字符串是否在原字符串的头部，返回布尔值
+        // endsWith()   表示参数字符串是否在原字符串的尾部，返回布尔值
+        let str1 = `Hello world!`;
+        console.log( str1.startsWith("Hello") ); //true
+        console.log( str1.startsWith("world") ); //false
+        console.log( str1.endsWith("!") ); //true
+        console.log( str1.endsWith("world!") ); //true
+        console.log( str1.endsWith("H") ); //false
+
+
+        //5. repeat()  表示将原字符串重复多少次，返回一个新的字符串
+        console.log('x'.repeat(3)); //xxx
+        console.log('hello'.repeat(3)); //hellohellohello
+
+
+
+
+
+    </script>
+</body>
+</html>

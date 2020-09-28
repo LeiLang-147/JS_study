@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //1.let生命的变量 只在当前块级作用域中起作用
+        //2.没有变量提升
+
+        var arr1 = [];
+        for(var i=0 ; i<2 ; i++){
+            arr1[i] = function(){
+                console.log(i);
+            }
+        }
+        //i会在全局作用域中找，二此时的i是循环结束时的，i=2
+        arr1[0]();  //2
+        arr1[1]();  //2
+
+
+
+        var arr2 = [];
+        for(let i=0 ; i<2 ; i++){
+            arr2[i] = function(){
+                console.log(i);
+            }
+        }
+        //let定义的foe循环，没循环一次就会开辟一个新的空间，后面使用的i会在相应的空间里去找，
+        //而此时的i就是相应空间的变量i的值
+        arr2[0]();  //0
+        arr2[1]();  //1
+
+
+
+    </script>
+</body>
+</html>

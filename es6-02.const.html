@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //1.具有块级作用域
+        //2.声明时就必须赋值
+        //3.const声明常量，常量就是值，赋值后不能修改
+
+
+        //基本数据类型不能更改
+        //可以修改复杂数据类型里面的值，只要不改变数组地址
+        const arr = [1, 2];
+        arr[0] = 3;
+        console.log(arr); //[3, 2] 只修改了里面的值
+
+        arr = [5, 2]; // Assignment to constant variable.
+        console.log(arr);
+
+
+
+
+        /* 
+                var          let          const
+            函数级作用域   块级作用域     块级作用域
+              变量提升    没有变脸提升   没有变脸提升
+              值可更改      值可更改       值可更改
+        
+         */
+
+
+
+    </script>
+</body>
+</html>

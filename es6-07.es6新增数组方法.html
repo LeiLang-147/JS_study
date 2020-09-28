@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+
+        //以前的数组方法  forEach()  filter()   some()
+        //es6新增数组的方法  Array.from()   find()    findIndex()    includes()
+
+
+
+
+        //from() 将类数组或可遍历的对象转换为真正的数组
+
+        //通过扩展运算符将类数组或可遍历的对象转换为真正的数组
+        var divs = document.querySelectorAll("div");
+        console.log(divs); //NodeList(5) [div, div, div, div, div] 
+
+        //把类数组转换为数组
+        //1.
+        console.log( [...divs] );  //[div, div, div, div, div]
+
+        //2.
+        let arr7 = Array.from(divs);
+        console.log(arr7);  //[div, div, div, div, div]
+
+        //将对象转为数组
+        let arrayLike = {
+            '0': 'a',
+            '1': 'b',
+            '2': 'c',
+            '3': 'd',
+            length: 4
+        }
+        let arr6 = Array.from(arrayLike)
+        console.log(arr6); //["a", "b", "c", "d"]
+        
+
+        var arrayLike2 = {
+            '0': '1',
+            '1': '2',
+            '2': '3',
+            length: 3
+        }
+        let arr8 = Array.from(arrayLike2, (item) => {
+            return item * 2;
+        })
+        console.log(arr8); //[2, 4, 6]
+
+
+        let arr9 = Array.from(arrayLike2);
+       // console.log(arr9);
+        let arr10 = [];
+        arr9.forEach((item) => {
+            item = item * 2;
+            arr10.push(item);
+        })
+        console.log(arr10);//[2, 4, 6]
+
+
+
+        //find()
+        //同于找出第一个符合条件的数组成员，如果没有找到就返回undefined
+        let arr11 = [{
+            id: 1,
+            name: '张三'
+        },{
+            id: 2,
+            name: '李四'
+        }];
+        let target = arr11.find((item) => {
+            return item.id == 2;
+        })
+        console.log(target); //{id: 2, name: "李四"}
+
+
+
+        //findIndex()
+        //用于找出第一个复合条件的数组成员的位置，如果没有找到就返回-1
+        let arr12 = [1, 5, 10, 15];
+        let index = arr12.findIndex((value) => {
+            return value > 5;
+        })
+        console.log(index); //2
+
+
+
+
+        //includes()
+        //表示某个数组是否包含给定的值，返回布尔值
+        let flag1 = [1, 2, 3].includes(2);
+        console.log(flag1); //treu
+        let flag2 = [1, 2, 3].includes(4);
+        console.log(flag2); //false
+
+
+
+
+
+    </script>
+</body>
+</html>

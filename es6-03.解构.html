@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //es6允许从数组或对象中提取值，按照对应的位置，赋值给变量
+
+        //数组解构   let [变量1, 变量2, ...] = 数组
+        var arr = [1, 2, 3];
+        let [a, b, c, d, e] = arr;
+        console.log(a); //1
+        console.log(b); //2
+        console.log(c); //3
+        console.log(d); //undefined
+        console.log(e); //undefined
+
+
+
+        //对象解构   let{变量1, 变量2, ...} = 对象  
+        //注意：这里的变量1，变量2，...  都会去对象里面去匹配对应的对象名称，所以这里的变量必须是对象里面存在的名称
+        let person = {
+            name: "andy",
+            age: 18
+        };
+        let {name, age, sex} = person;
+        console.log(name); //andy
+        console.log(age); //18
+        console.log(sex); //undefined
+
+        let dog = {
+            dogname: "哈士奇",
+            dogage: 3
+        }
+        let {dogname: itname} = dog;
+        
+        console.log(itname); //哈士奇
+
+
+    </script>
+</body>
+</html>
