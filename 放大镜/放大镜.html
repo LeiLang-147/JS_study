@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .one{
+            width: 500px;
+            height: 318px;
+            border: 3px solid brown;
+            margin-top: 100px;
+            margin-left: 100px;
+            position: relative;
+            /* overflow: hidden; */
+        }
+        .one>img{
+            width: 100%;
+            height: 100%;
+        }
+        .big{
+            width: 150px;
+            height: 150px;
+            background-color: yellowgreen;
+            opacity: 0.5;
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+            display: none;
+        }
+        .two{
+            width: 500px;
+            height: 318px;
+            border: 3px solid brown;
+            position: absolute;
+            top: -3px;
+            left: 520px;
+            overflow: hidden;
+            display: none;
+        }
+        .two>img{
+            width: 1000px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class=".wrap">
+        <div class="one">
+            <img src="../img/0.jpg" alt="">
+            <div class="big"></div>
+            <div class="two">
+                <img src="../img/0.jpg" class="bigImg">
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        var one = document.querySelector('.one');
+        var big = document.querySelector('.big');
+        var two = document.querySelector('.two');
+        var bigImg = document.querySelector('.bigImg');
+        //1.当鼠标经过one 就显示 big 和 two
+        one.addEventListener('mouseover', function(){
+            big.style.display = "block";
+            two.style.display = "block";
+        });
+
+        one.addEventListener('mouseout', function(){
+            big.style.display = "none";
+            two.style.display = "none";
+        });
+
+        one.addEventListener('mousemove', function(e){
+            var x = e.pageX - this.offsetLeft;
+            var y = e.pageY - this.offsetTop;
+            var xx = x - big.offsetWidth/2;
+            var yy = y - big.offsetHeight/2;
+            if( xx < 0){
+                xx = 0;
+            }else if( xx > (one.offsetWidth - big.offsetWidth) ){
+                xx = one.offsetWidth - big.offsetWidth;
+            }
+            if( yy < 0 ){
+                yy = 0;
+            }else if( yy > (one.offsetHeight - big.offsetHeight) ){
+                yy = one.offsetHeight - big.offsetHeight;
+            }
+
+            big.style.left = xx + 'px';
+            big.style.top = yy + 'px';
+
+//大图片移动距离 = big移动门距离 * 大图片最大移动距离（图片宽度 - 大盒子宽度） / big最大移动距离（one.offsetHeight - big.offsetHeight）
+            //big最大移动距离
+            var bigMaxX = one.offsetWidth - big.offsetWidth;
+            var bigMaxY = one.offsetHeight - big.offsetHeight;
+            //大图片最大移动距离
+            var twoMaxX = bigImg.offsetWidth - two.offsetWidth;
+            var twoMaxY = bigImg.offsetHeight - two.offsetHeight;
+
+            var bigImgX = xx * twoMaxX / bigMaxX;
+            var bigImgY = yy * twoMaxY / bigMaxY;
+            //大图片与小图片移动距离应该相反
+            bigImg.style.left = -bigImgX + "px";
+            bigImg.style.top = -bigImgY + "px";
+        });
+
+
+    </script>
+</body>
+</html>

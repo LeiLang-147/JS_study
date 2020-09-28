@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-size: 30px;
+            color: #ffffff;
+            text-align: center;
+        }
+        body{
+            background-color: #eeeeee;
+        }
+        .wrap{
+            width: 65%;
+            margin: auto;
+        }
+        .header{
+            height: 100px;
+            background-color: crimson;
+        }
+        .banner{
+            margin-top: 20px;
+            height: 600px;
+            background-color: darkcyan;
+        }
+        .ad{
+            margin-top: 20px;
+            height: 300px;
+            background-color: darkmagenta;
+        }
+        .one{
+            margin-top: 20px;
+            height: 500px;
+            background-color:darksalmon;
+        }
+        .two{
+            margin-top: 20px;
+            height: 500px;
+            background-color:darkseagreen;
+        }
+        .three{
+            margin-top: 20px;
+            height: 500px;
+            background-color:darkslateblue;
+        }
+        .four{
+            margin-top: 20px;
+            height: 500px;
+            background-color:darkviolet;
+        }
+        .five{
+            margin-top: 20px;
+            height: 500px;
+            background-color:dodgerblue;
+        }
+        .six{
+            margin-top: 20px;
+            height: 500px;
+            background-color:goldenrod;
+        }
+        .footer{
+            margin-top: 20px;
+            height: 450px;
+            background-color:#aaa;
+        }
+        .nav{
+            position: fixed;
+            top: 300px;
+            right: 50px;
+            background-color: #cccccc;
+            display: none;
+        }
+        ul{
+            list-style: none;
+        }
+        li{
+            height: 35px;
+            width: 150px;
+            line-height: 35px;
+            padding: 10px 0;
+            font-size: 20px;
+            cursor: pointer;
+            position: relative;
+        }
+        .item::after{
+            content: "";
+            width: 150px;
+            height: 2px;
+            background-color: #aaaaaa;
+            position: absolute;
+            left: 0px;
+            bottom: 0px;
+        }
+        .current{
+            background-color: rgb(228, 4, 4);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="header">header</div>
+        <div class="banner">banner</div>
+        <div class="ad">ad</div>
+    </div>
+    <div class="wrap main">
+        <div class="one">one</div>
+        <div class="two">two</div>
+        <div class="three">three</div>
+        <div class="four">four</div>
+        <div class="five">five</div>
+        <div class="six">six</div>
+    </div>
+    <div class="wrap">
+        <div class="footer"></div>
+    </div>
+    <div class="nav">
+        <ul>
+            <li class="item">go one</li>
+            <li class="item">go two</li>
+            <li class="item">go three</li>
+            <li class="item">go four</li>
+            <li class="item">go five</li>
+            <li>go six</li>
+        </ul>
+    </div>
+
+    <script src="jquery-3.4.1.min.js"></script>
+    <script>
+        $(function(){
+            //每次加载页面，就让页面返回顶部
+            $(window).scrollTop(0);
+            //互斥锁
+            var flag = true;
+
+            $(window).scroll(function(){
+                if($(document).scrollTop() >= $(".ad").offset().top){
+                    $(".nav").fadeIn();
+                }else{
+                    $(".nav").fadeOut();
+                }
+
+                if(flag){
+                    //页面滚动到某个区域，电梯导航相应的小li应该添加current类名
+                    $(".main div").each(function(i, ele){
+                        if($(document).scrollTop() >= $(ele).offset().top){
+                            $(".nav li").eq(i).addClass("current").siblings().removeClass("current");
+                        }
+                    });
+                }
+
+            });
+
+    
+
+            $(".nav").on("click", "li", function(){
+                flag = false;
+                //找到点击的li的索引
+                var index = $(this).index();
+                //找到对应索引的盒子，计算它的offset().top
+                var current = $(".main div").eq(index).offset().top;
+                $("body, html").stop().animate({
+                    scrollTop: current
+                }, function(){
+                    flag = true;
+                });
+
+                //点击之后给当前li添加current类名，其他li移除
+                $(this).addClass("current").siblings().removeClass("current");
+            });
+
+
+
+        });
+            
+  
+    </script>
+</body>
+</html>

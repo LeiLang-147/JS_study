@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="document.frm.username.focus()">
+    <form name="frm" action="server.php" method="POST" onsubmit="return show()">
+        用户名：<input type="text" onblur="one(this)" name="username" id="username" value="admin"/><br>
+        密码：<input type="password" onblur="two()" name="password" id="pw" /><br>
+        
+        <input type="text" size="4" onkeyup="this.value = this.value.toUpperCase()"><img src="img/验证码.jpg" width="80px" height="30px" style="vertical-align: middle;"><br>
+        
+        <input type="submit"  name="submit1" value="提交"><br>
+
+        <select name="pro" id="" onchange="show(this)">
+            <option value="1">java</option>
+            <option value="2">PHP</option>
+            <option value="3">Python</option>
+            <option value="4">JavaScript</option>
+        </select>
+        <br>
+
+        <button onclick="sub()">点击提交</button>
+    </form>
+
+    <script>
+       function show(obj){
+        alert(obj.selectedIndext);
+       }
+
+    </script>
+</body>
+</html>

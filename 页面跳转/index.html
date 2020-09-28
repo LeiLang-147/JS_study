@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            font-size: 20px;
+        }
+        span{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        您好：<span></span>
+    </div>
+    <script>
+        console.log(location.search);//  ?name=123
+        var params = location.search.substr(1);//从第一个位置开始截取字符串，一直到最后
+        var srtArr = params.split("=");
+        console.log(srtArr);
+        var span = document.querySelector('span');
+        span.innerHTML = srtArr[1];
+
+    </script>
+</body>
+</html>

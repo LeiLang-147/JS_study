@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>支付成功</title>
+    <style>
+        div{
+            width: 200px;
+            height: auto;
+            margin: 100px auto;
+            
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1 style="color: red;">支付成功！</h1>
+        <p><span id="jumpTo" style="color: red;">10</span> 秒后返回</p>
+        <button>返回</button>
+    </div>
+
+    <script>
+        //加载页面的时候，应该触发一个计时器
+        window.onload = function () {
+            var timer = 10;
+            setInterval(function(){
+                timer--;
+                document.getElementById("jumpTo").innerHTML = timer;
+                if(timer == 0){
+                    location.href = "./index.html";
+                }
+            },1000)
+        }
+        document.getElementsByTagName("button")[0].onclick = function(){
+              location.href = "./index.html";
+          }
+    </script>
+</body>
+</html>

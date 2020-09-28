@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .wrap{
+            width: 300px;
+            height: 400px;
+            margin: 50px auto;
+        }
+        ul li{
+            width: 100%;
+            height: 50px;
+            list-style: none;
+            border: 1px solid #33aa33;
+            text-align: left;
+            line-height: 50px;
+        }
+        ul li span{
+            width: 20px;
+            height: 20px;
+            float: left;
+            margin-top: 15px;
+            margin-left: 20px;
+            margin-right: 20px;
+            background-color: #33aa33;
+            display: block;
+            background-image: url(./img/ck.png);
+        }
+        ul li span.active{
+            background-image: url(./img/cked.jpg);
+        }
+        .box{
+            width: 300px;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+        button{
+            width: 80px;
+            height: 30px;
+        }
+        button.act{
+            background-color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <ul>
+            <li><span></span>item1</li>
+            <li><span></span>item2</li>
+            <li><span></span>item3</li>
+            <li><span></span>item4</li>
+            <li><span></span>item5</li>
+            <li><span></span>item6</li>
+            <li><span></span>item7</li>
+        </ul>
+        <div class="box">
+            <button>全选</button>
+            <button class="act">全不选</button>
+            <button>反选</button>
+        </div>
+    </div>
+</body>
+
+<script>
+    var lis = document.getElementsByTagName("li");
+    var spans = document.getElementsByTagName("span");
+    var btn = document.getElementsByTagName("button");
+    var len = lis.length;
+    var count = 0;
+
+    for(var i=0; i<len; i++){
+        spans[i].kaiguan = false;
+        spans[i].mark = i;
+        spans[i].onclick = function(){
+            if(this.kaiguan){
+                this.className = '';
+                count--;
+            }else{
+                this.className = 'active';
+                count++;
+            }
+            this.kaiguan = !this.kaiguan;
+
+            /* 按钮背景颜色 */
+           isNum();
+        }
+    }
+
+
+    btn[0].onclick = function(){
+        this.className = 'act';
+        btn[1].className = '';
+        count = len;
+        for(var i=0; i<len; i++){
+            spans[i].className = 'active';
+            spans[i].kaiguan = true;
+        }
+    }
+
+    btn[1].onclick = function(){
+        this.className = 'act';
+        btn[0].className = '';
+        count = 0;
+        for(var i=0; i<len; i++){
+            spans[i].className = '';
+            spans[i].kaiguan = false;
+        }
+    }
+
+    btn[2].onclick = function(){
+        for(var i=0; i<len; i++){
+            if(spans[i].kaiguan){
+                spans[i].className = '';
+            }else{
+                spans[i].className = 'active';
+            }
+            spans[i].kaiguan = !spans[i].kaiguan;
+            count = len - count;
+            isNum();
+        }
+
+    }
+
+
+    function isNum(){
+        if(count === len){
+            btn[0].className = 'act';
+            btn[1].className = '';
+        }else if(count === 0){
+            btn[0].className = '';
+            btn[1].className = 'act';
+        }else{
+            btn[0].className = '';
+            btn[1].className = '';
+        }
+    }
+   
+
+
+
+</script>
+
+
+
+</html>

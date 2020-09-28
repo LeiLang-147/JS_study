@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .v_code{
+            width: 300px;
+            height: 200px;
+            margin:150px auto;
+        }
+        .code_show{
+            margin-bottom: 20px;
+        }
+        .code{
+            font-size: 28px;
+            font-style: italic;
+            color: red;
+            font-weight: bold;
+            display: block;
+            width: 100px;
+            float: left;
+        }
+        .code_show a{
+            margin-top: 10px;
+            display: block;
+            float: left;
+        }
+        #linkbt{
+            margin-left: 30px;
+        }
+        .code_show,.input_code{
+            padding: 20px 0;
+        }
+        #Button1{
+            margin-left: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="v_code">
+        <div class="code_show">
+            <span class="code" id="checkCode"></span>
+            <a href="" id="linkbt">看不清换一张</a>
+        </div>
+        <div class="input_code">
+            <label for="inputCode">验证码：</label>
+            <input type="text" id="inputCode">
+            <span id="text_show"></span>
+        </div>
+        <input id="Button1" type="button" value="确定"/>
+    </div>
+
+    <script>
+        //1.生成验证码  6位数  内容0-9 a-f  
+        //随机生成6位内容必须是0-9、a-f的字符串
+        //数组 下标   从数组中取出随机下标0-15
+        
+        //2.进行验证  点击确定时，进行对比
+        
+        window.onload = function(){
+            /* var res = getCode();
+            function getCode() {
+                var arr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"];
+                var str = "";
+                for(var i = 0; i < 6; i++){
+                    var num = Math.round(Math.random()*(arr.length-1));
+                    str += arr[num];
+                }
+                return str;
+            }
+            document.getElementById("checkCode").innerText = res;
+
+            //这是一个点击事件
+            document.getElementById("linkbt").onclick = function(){
+                document.getElementById("checkCode").innerText = getCode();
+            } */
+
+
+
+            var str = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            var res = "";
+            for(var i = 0; i < 6; i++){
+                var cha = Math.floor(Math.random()*str.length);
+                console.log(cha);
+                res += str.substr(cha, 1);
+            }
+            document.getElementById("checkCode").innerHTML = res;
+
+            //提交进行对比
+            document.getElementById("Button1").onclick = function(){
+                /* var code = document.getElementById("checkCode").innerText; */
+                var inputCode = document.getElementById("inputCode").value;
+                if( res != inputCode){
+                    alert("验证码错误！");
+                    //重置
+                    document.getElementById("inputCode").value = "";
+                    return false;
+                }
+                else{
+                    location.href = "../相册选择功能/index.html";
+                }
+                return false;
+            }
+        }
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .content{
+            width: 800px;
+            height: 650px;
+            margin: 50px auto;
+            text-align: center;
+        }
+        .big{
+            width: 300px;
+            height: 400px;
+        }
+        .small{
+            width: 600px;
+            height: 100px;
+            margin: 100px auto;
+        }
+        .small>img{
+            display: block;
+            width: 90px;
+            height: 100px;
+            float: left;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div>
+            <img src="./img/1.jpg" class="big">
+        </div>
+        <div class="small">
+            <img src="./img/1.jpg" alt="">
+            <img src="./img/2.jpg" alt="">
+            <img src="./img/3.jpg" alt="">
+            <img src="./img/4.jpg" alt="">
+            <img src="./img/5.jpg" alt="">
+            <img src="./img/6.jpg" alt="">
+        </div>
+    </div>
+    
+    <script>
+        //逻辑：本质上就是把小图的src赋值给大图的src
+        //图片元素，src = ""
+        var imgs = document.getElementsByTagName("img");
+        for( var i = 1; i < imgs.length; i++){
+            imgs[i].onclick = function(){
+                //把小图的src赋值给大图的src
+                imgs[0].src = this.src;
+            }
+
+        }
+
+
+
+
+
+    </script>
+</body>
+</html>

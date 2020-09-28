@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .wrap{
+            margin: 20px auto;
+            width: 1000px;
+        }
+        .wrap>div{
+            float: left;
+        }
+        div{
+            width: 250px;
+            margin-bottom: 5px;
+            line-height: 50px;
+            text-align: center;
+            cursor: pointer;
+        }
+        p{
+            width: 100%;
+            height: 50px;
+            border: 1px solid black;
+            background-color: deeppink;
+        }
+        .list{
+            display: none;
+            width: 100%;
+            list-style: none;
+        }
+        li{
+            width: 100%;
+            background-color: #f9f;
+            cursor: pointer;
+            margin-top: 2px;
+        }
+        li:hover{
+            background-color: purple;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div>
+            <p>地区</p>
+            <ul class="list">
+                <li>上海</li>
+                <li>北京</li>
+                <li>天津</li>
+                <li>广州</li>
+                <li>深圳</li>
+            </ul>
+        </div>
+        <div>
+            <p>好友</p>
+            <ul class="list">
+                <li>习近平</li>
+                <li>刘德华</li>
+                <li>胡歌</li>
+            </ul>
+        </div>
+        <div>
+            <p>爱好</p>
+            <ul class="list">
+                <li>吃饭</li>
+                <li>睡觉</li>
+                <li>女装</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="../jQurey/jquery-3.4.1.min.js"></script>
+    <script>
+        /* var title = document.getElementsByTagName("p");
+        var list = document.getElementsByClassName("list"); 
+        
+        for(var i = 0; i < list.length; i++){
+            title[i].index = i;//绑定下标
+            title[i].mark = false;//定义一个标记，默认所有的二级下拉菜单不显示
+            //开(display:block)   关(display:none)
+            title[i].onclick = function(){
+                // console.log(this.index); 
+                if(this.mark){
+                    list[this.index].style.display = "none";
+                }else{
+                    //遍历到所有的标题，先全部关上，然后再打开你点击的那个
+                    for(var j = 0; j < list.length; j++){
+                        list[j].style.display = "none";//把所有的样式都改为none
+                        title[j].mark = false;
+                    }
+                    //this.index //0  1  2就是你点击哪个显示哪个
+                    list[this.index].style.display = "block";
+                }
+                //取反
+                this.mark = !this.mark;
+            }
+        } */
+        console.log($("p"));
+        $("p").on("mouseenter", function(){
+            $(".list").stop().slideUp("fast");
+            $(this).siblings(".list").stop().slideDown("fast");
+        });
+        $("p").on("mouseleave", function(){
+            $(".list").stop().slideUp("fast");
+        });
+
+
+
+
+    </script>
+</body>
+</html>

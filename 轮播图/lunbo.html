@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="box">
+        <div class="wrap">
+            <img src="img/1.jpg" alt="">
+            <img src="img/2.jpg" alt="">
+            <img src="img/3.jpg" alt="">
+            <img src="img/4.jpg" alt="">
+            <img src="img/5.jpg" alt="">
+        </div>
+        <span class="toleft">←</span>
+        <span class="toright">→</span>
+        <ul>
+            <!-- <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li> -->
+        </ul>
+    </div>
+
+    <script src="animate.js"></script>
+    <script>
+
+        /* 
+            功能需求
+                1.鼠标经过轮播图模块，左右按钮显示，离开隐藏
+                2.点击左右按钮一次，图片往左切换一张，以此类推
+                3.图片播放的同时，下面小圆圈模块跟随一起变化
+                4.点击小圆圈，可以播放相应图片
+                5.鼠标不经过轮播图，轮播图也会自动播放图片，经过时停止播放
+                6.动态生成下方小圆圈
+        */
+        var box = document.querySelector('.box');
+        var spans = document.querySelectorAll('span');
+        var wrap = document.querySelector('.wrap');
+        var imgs = document.querySelectorAll('img');
+        var ul = document.querySelector('ul');
+
+        var timer = null;
+        var imgWidth = imgs[0].offsetWidth;
+
+        dingshiqi();
+        //鼠标移入box，左右按钮出现
+        box.addEventListener('mouseover', function(){
+            for(var i=0 ; i<spans.length ; i++){
+                spans[i].style.display = 'block';
+            }
+            //停止定时器
+            clearInterval(timer);
+        })
+        //鼠标移出box，左右按钮消失
+        box.addEventListener('mouseout', function(){
+            for(var i=0 ; i<spans.length ; i++){
+                spans[i].style.display = 'none';
+            }
+            dingshiqi();
+        })
+
+
+        //动态生成小圆圈
+        for(var i=0 ; i<imgs.length ; i++){
+            var li = document.createElement('li');
+            //给li设置自定义属性保存索引
+            li.setAttribute('index', i);
+            ul.appendChild(li);
+            //给点击的li设置类名为current
+            li.addEventListener('click', function(){
+                for(var j=0 ; j<ul.children.length ; j++ ){
+                    ul.children[j].className = '';
+                }
+                this.className = 'current';
+                //点击小圆圈，可以播放相应图片
+                //移动的距离是小圆圈的索引号 乘以 图片的宽度
+                //点击小圆圈，就拿到这个小圆圈的索引
+                var index = this.getAttribute('index');
+                //当点击了小圆圈，就把这个小圆圈的索引给num、circle
+                num = circle = index;
+                animate(wrap, -imgWidth*index);
+            })
+        }
+        //给第一个小圆圈添加
+        ul.children[0].className = 'current';
+
+        //克隆第一张图片，放到wrap最后面
+        var first = wrap.children[0].cloneNode(true);
+        wrap.appendChild(first);
+
+
+
+        //点击右侧按钮一次，图片往右切换一张
+        var num = 0;
+        //circle控制小圆圈的播放
+        var circle = 0;
+        //flag节流阀
+        var flag = true;
+        spans[1].addEventListener('click', function(){
+            if(flag){
+                flag = false;//关闭节流阀
+                //如果走的最后复制的图片上，此时，wrap要快速复原，left:0
+                if(num == imgs.length){
+                    wrap.style.left = "0px";
+                    num = 0;
+                }
+                num++;
+                animate(wrap, -imgWidth*num, function(){
+                    flag = true;
+                });
+                
+                circle++;
+                //如果circle走到最后一张图片，就设为0
+                if(circle == imgs.length){
+                    circle = 0;
+                }
+                circleChange();
+            }
+        }) ;
+
+        //点击左侧按钮一次，图片往左切换一张
+        spans[0].addEventListener('click', function(){
+            if(flag){
+                flag = false;
+
+                //如果走的最后复制的图片上，此时，wrap要快速复原，left:0
+                if(num == 0){
+                   wrap.style.left = -imgs.length * imgWidth +"px";
+                   num = imgs.length;
+               }
+               num--;
+               animate(wrap, -imgWidth*num, function(){
+                    flag = true;
+                });
+               circle--;
+               //如果circle走到最后一张图片，就设为0
+               if(circle < 0){
+                   circle = ul.children.length - 1;
+               }
+               circleChange();
+            }
+        })
+
+
+        function circleChange(){
+            //先清除所有的
+            for(var j=0 ; j<ul.children.length ; j++ ){
+                ul.children[j].className = '';
+            }
+            //再为现在这个添加
+            ul.children[circle].className = 'current';
+        }
+
+        //自动播放轮播图
+
+        function dingshiqi(){
+            timer = setInterval(function(){
+                //手动调用点击事件
+                spans[1].click();
+            }, 3000);
+        }
+        
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
