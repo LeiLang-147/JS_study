@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>发送</button>
+    <button>发送</button>
+    <button>发送</button>
+
+    <script>
+        /* 
+            call()   applay()    bind()
+                相同点：
+                    都可以改变函数内部的this指向
+                区别点：
+                    1.call和applay会调用函数，并且改变函数内部this指向
+                    2.call和applay传递的参数不一样，call传递参数aru1,aru2...的形式，而APPlay必须是数组[aru1,aru2...]的形式
+                    3.bind 不会调用函数，可以改变函数内部this指向
+                主要应用场景：
+                    1.call 经常做继承
+                    2.applay 经常跟数组有关系。比如借助于数学对象实现数组最大值最小值
+                    3.bind 不用调用函数，但是还想改变this指向。比如改变定时器内部的this指向
+        */
+
+
+
+
+        //call()  可以调用函数，可以改变函数的this指向      可以传入参数
+
+        var o = {
+            name: "andy"
+        }
+
+        function fn(a, b){
+            console.log(this.name);
+            console.log(a + b);
+        }
+
+        fn.call(o, 1, 2);
+
+
+        //call() 主要作用可以实现继承
+
+        function Father(uname, age, sex){
+            this.uname = uname;
+            this.age = age;
+            this.sex = sex;
+        }
+        function Son(uname, age, sex){
+            Father.call(this, uname, age, sex);
+        }
+
+        var son = new Son("刘德华", 20, "男");
+        console.log(son);
+
+
+
+
+        //applay()  可以调用函数，可以改变函数的this指向    参数必须是数组(伪数组)
+        function fn1(a, b, c){//每个参数都是数组里面的一个值
+            console.log(this.name);
+            console.log(a); 
+            console.log(a + b);
+        }
+
+        fn1.apply(o, [1, 2, 3]);
+
+        //applay() 的主要应用 比如借助数学内置对象求最大值Math.max()
+        var arr = [1,66,3,99,4];
+        var res = Math.max.apply(this, arr);
+        console.log(res);
+
+
+
+        //1. bind()   不会调用函数，但是可以改变this指向
+        //2. 返回的是原函数改变this后的新函数
+
+        function fn2(a, b){
+            console.log(this);
+            console.log(a + b);
+        }
+
+        var res2 = fn2.bind(o, 1, 2);
+        console.log(res2);
+        res2();
+
+        //3. 如果有的函数我们不需要立即调用，但是又想改变这个函数内部this指向此时的bind
+        //4. 当点击按钮后，就禁用这个按钮，3秒钟之后开启这个按钮
+
+        /*var btn = document.querySelector("button");
+         btn.onclick = function(){
+            this.disabled = true;
+            setTimeout(function(){//定时器里面的this指向的是window
+                this.disabled = false;
+            }.bind(this), 3000);
+        }*/
+
+        var btns = document.querySelectorAll("button");
+        for(var i=0 ; i<btns.length ; i++){
+            btns[i].onclick = function(){
+                this.disabled = true;
+                setTimeout(function(){
+                    this.disabled = false;
+                }.bind(this), 2000);
+            }
+        }
+
+    </script>
+</body>
+</html>

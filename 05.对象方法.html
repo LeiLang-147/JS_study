@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+
+        //Object.keys()  用于获取对象自身所有的属性   效果类似for in    返回一个由属性名组成的数组
+        var obj = {
+            id: 1,
+            pname: "小米",
+            price: 1999,
+            num: 2000
+        };
+
+        var arr = Object.keys(obj);
+        console.log(arr);
+
+        arr.forEach(function(val){
+            console.log(val);
+        })
+
+
+        //Object.defineProperty(obj, "属性名", {value: 值, })  定义新属性或修改原有的属性
+        //"属性名" 有的话就是修改，没有的话就是新增
+        var obj2 = {
+            id: 1,
+            pname: "小米",
+            price: 1999,
+            num: 2000
+        };
+
+        Object.defineProperty(obj2, "num2", {
+            value: 1000,
+            enumerable: true
+        });
+        Object.defineProperty(obj2, "id", {writable: false}); //id值不允许修改  true允许修改
+        Object.defineProperty(obj2, "address", {
+            value: "重庆",
+            writable: false,//id值不允许修改  true允许修改
+            enumerable: false,//不允许遍历出来该属性 默认值就是false
+            configurable: false//不允许被删除该属性  也不能再次修改该属性  默认值就是false
+        }); 
+        console.log(Object.keys(obj2));
+        console.log(obj2);
+
+
+    </script>
+</body>
+</html>

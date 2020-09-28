@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+    //forEach()
+        //第一个参数：每一个元素
+        //第二个参数：每一个元素的下标
+        //第三个参数：数组本身
+        var arr = [9,8,7,6,5,4,];
+        var sum = 0;
+        arr.forEach(function(val, index, self){
+            //第一个参数：每一个元素
+            //第二个参数：每一个元素的下标
+            //第三个参数：数组本身
+          
+            //console.log(val);
+            //console.log(index);
+            //console.log(self);
+            //console.log("---------------------------");
+            sum += val;
+        })
+        console.log(sum); //数组中元素的和
+
+
+
+    //filter()  过滤器  筛选数组
+        //第一个参数：每一个元素
+        //第二个参数：每一个元素的下标
+        //第三个参数：数组本身
+        //会返回一个新的数组
+        var arr2 = [9,8,7,6,5,4,3,2,1];
+        var res = arr2.filter(function(val, index){
+            return val > 5;
+        })
+        console.log(res);
+
+
+
+    //some()   检测数组中的元素是否满足指定条件(是否有满足条件的元素)
+        //如果找到第一个满足条件的元素，循环终止
+        //第一个参数：满足条件的第一个元素的值
+        //第二个参数：满足条件的第一个元素的下标
+        //第三个参数：数组本身
+        //返回值：有满足条件的元素就返回true, 否则返回false
+        var arr3 = [9,8,7,6,5,4,3,2,1];
+        var res2 = arr3.some(function(val, index){
+            console.log(index, val);//9
+            return val < 5;
+        })
+        console.log(res2);
+
+    </script>
+</body>
+</html>
