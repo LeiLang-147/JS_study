@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .wrap{
+            width: 300px;
+            margin: 50px auto;
+        }
+        .wrap>div{
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            background-color: burlywood;
+            border-bottom: 1px solid #ffffff;
+        }
+        .wrap>div>input{
+            margin-left: 30px;
+            margin-right: 20px;
+        }
+        button{
+            width: 80px;
+            height: 30px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrap">
+        <div>
+            <input type="checkbox" > item1
+        </div>
+        <div>
+            <input type="checkbox"> item2
+        </div>
+        <div>
+            <input type="checkbox"> item3
+        </div>
+        <div>
+            <input type="checkbox"> item4
+        </div>
+        <div>
+            <input type="checkbox"> item5
+        </div>
+        <div>
+            <input type="checkbox"> item6
+        </div>
+        <div>
+            <input type="checkbox"> item7
+        </div>
+        <div style="text-align: center;">
+            <button onclick="getNum(0)">全选</button>
+            <button onclick="getNum(1)">全不选</button>
+            <button onclick="getNum(2)">反选</button>
+        </div>
+    </div>
+
+    <script>
+        
+        var input = document.getElementsByTagName("input");
+
+        function getNum(num){
+            for(var i = 0; i < input.length; i++){   
+                if(num == 0){
+                    input[i].checked = true;
+                }else if(num == 1){
+                    input[i].checked = false;
+                }else{
+                    input[i].checked = !input[i].checked;
+                }
+            }
+        }
+
+
+    </script>
+    
+</body>
+</html>

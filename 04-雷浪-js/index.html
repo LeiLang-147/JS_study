@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{ margin: 0; padding: 0; }
+        .top{ width: 350px; height: 45px; background-color: rgb(243, 150, 150); margin: auto; margin-top: 50px;
+             padding-top: 5px;}
+        #head_img{ width: 40px; height: 40px; overflow: hidden; position: relative; border-radius: 50%; 
+            margin-left: 10px; float: left;}
+        img{ width: 150%; height: 100%; position: absolute; display: none; transform: translateX(-10px);}
+        .active{ display: block; }
+        #info{ width: 220px; height: 40px; float: left; margin-left: 10px; display: none; }
+        input{width: 170px; height: 28px; margin-top: 2.5px; outline: none; font-size: 16px;}
+        #sub{ width: 40px; height: 30px; margin-top: 5px;}
+        #add{ width: 40px; height: 30px; margin-top: 5px; font-size: 20px; float: left; margin-left: 10px;
+             outline: none;}
+
+        ul{width: 350px; margin: auto;list-style: none;}
+        li{width: 350px; height: 45px; white-space: nowrap; text-overflow: ellipsis;overflow: hidden; 
+            margin-top: 5px; /* display: none; */ background-color: rgb(240, 173, 153);
+             color: #fff; line-height: 50px; position: relative;}
+        li>div{width: 40px; height: 40px;  float: left; margin-right: 10px; margin-top: 2.5px;
+         background-size: 150% 100%; 
+            background-position: -10px; margin-left: 10px; border-radius: 50%; overflow: hidden;}
+    </style>
+</head>
+<body>
+    <div class="top">
+        <div id="head_img">
+            <img src="img/1.jpg" class="active">
+            <img src="img/2.jpg" >
+        </div>
+        <div id="info">
+            <input type="text" id="inp">
+            <button id="sub">发布</button>
+        </div>
+        <button id="add">+</button>
+    </div>
+    <ul id="wrap">
+
+    </ul>
+
+
+    <script>
+        console.log(4 % 5);
+
+
+        var add = document.getElementById("add");
+        var info = document.getElementById("info");
+        var imgs = document.querySelectorAll("#head_img>img");
+        var input = document.getElementById("inp");
+        var sub = document.getElementById("sub");
+        var headImg = document.getElementById("head_img");
+        var liImg = document.getElementById("li_img");
+        var ul = document.getElementById("wrap");
+        var lis = document.getElementsByTagName("li");
+
+
+        //点击+按钮，输入框出现，再点击消失
+        var mark = false;
+        add.onclick = function(){
+            mark = !mark;
+            if(mark){
+                info.style.display = "block";
+            }else{
+                info.style.display = "none";
+            }
+        }
+
+        //点击切换头像
+        var flag = true;
+        imgs[0].onclick = function(){
+            imgs[0].className = "";
+            imgs[1].className = "active";
+            flag = false;
+        }
+        imgs[1].onclick = function(){
+            imgs[0].className = "active";
+            imgs[1].className = "";
+            flag = true;
+        }
+
+
+
+        //点击发布按钮
+        sub.onclick = function(){
+            if(input.value == ""){
+                alert("请输入内容!");
+                return;
+            }
+            if(flag){
+                ul.innerHTML += "<li><div style='background-image: url(img/1.jpg);'></div>" + input.value; + "</li>";
+            }else{
+                ul.innerHTML += "<li><div style='background-image: url(img/2.jpg);'></div>" + input.value; + "</li>"
+            }
+            input.value = "";
+        }
+
+       
+
+
+
+
+
+    </script>
+</body>
+</html>

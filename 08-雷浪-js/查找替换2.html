@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        #box{
+            width:500px;
+            height: 200px;
+            margin:50px auto;
+            padding:10px;
+            border:2px solid pink;
+        }
+        span{
+            color:#f60;
+            font-size:18px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="box">
+        <input type="text" placeholder="匹配项">
+        <input type="text" placeholder="替换项">
+        <button>查找</button>
+        <button>替换</button>
+        <p>凯迪，出生于吉林长春，毕业于重庆大学美视电影学院表演系，中国内地女演员。
+            2008年凯迪参演家庭轻喜剧《把日子过好》；2010年参演法院题材剧《防线》；2011年出演悬疑电影《密室之不可靠岸》；2014年参演爱情喜剧电影《撒娇女人最好命》；2016年参演剧情悬疑电影《记忆大师》 [1]  ；2017年出演悬疑推理剧《白夜追凶》，同年参演爱情奇幻剧《结爱·千岁大人的初恋》。</p>
+    </div>
+
+
+    <script>
+        var p = document.getElementsByTagName("p")[0];
+        var ips = document.getElementsByTagName("input");
+        var btns = document.getElementsByTagName("button");
+        var pInner = p.innerHTML;//保留初始的文本
+
+        //查询
+        btns[0].onclick = function(){
+            var val = ips[0].value;
+            if(val !== ""){
+                //var arr = pInner.split(val);//split()把字符串分割为数组，参数是指定的地方分割
+                //var str = pInner.split(val).join("<span>" + val + "</span>");//join()把数组中的所有元素放入一个字符串,参数是指定的分隔符
+                p.innerHTML = pInner.split(val).join("<span>" + val + "</span>");
+            }else{
+                alert("请输入!!");
+                return false;
+            }
+        }
+
+        //替换
+        btns[1].onclick = function(){
+            var val = ips[0].value;
+            var val2 = ips[1].value;
+            //两个输入框中的值不能为空
+            if(val !== "" && val2 !== ""){
+                p.innerHTML = pInner.split(val).join("<span>" + val2 + "</span>");
+                pInner = pInner.split(val).join(val2);
+                ips[0].value = "";
+                ips[1].value = "";
+            }
+        }
+
+    </script>
+</body>
+</html>

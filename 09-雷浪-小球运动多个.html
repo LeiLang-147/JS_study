@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        body{
+            background-color: #90f;
+        }
+        .ball{
+            position: absolute;
+            left:0;
+            top:0;
+            width:100px;
+            height:100px;
+            background-color: #f0f;
+            border-radius: 50%;
+        }
+
+    </style>
+</head>
+<body>
+
+    <script>
+
+        run( 10 );
+        function run( num ){
+            for( var i = 0;i< num ; i++ ){
+                var div = document.createElement("div") ; //创建新的div节点
+                div.className = 'ball';
+                div.speedX =  Math.floor(Math.random()*9 + 2); //自定义属性保存值；
+                div.speedY =  Math.floor(Math.random()*9 + 2); //自定义属性保存值；
+                document.body.appendChild( div );   //把div作为子元素添加到body下
+            }
+
+            var box = document.getElementsByClassName( "ball" );
+            var maxX = document.documentElement.clientWidth - box[0].offsetWidth;
+            var maxY = document.documentElement.clientHeight  - box[0].offsetHeight;
+
+            window.onresize = function(){
+                maxX = document.documentElement.clientWidth - box[0].offsetWidth;
+                maxY = document.documentElement.clientHeight  - box[0].offsetHeight;
+            }
+
+            play();
+            function play(){
+                for( var i = 0;i< num ; i++ ){
+                    //var ball = box[i];
+                    var startTop = box[i].offsetTop;
+                    var startLeft = box[i].offsetLeft;
+
+                    //startTop都为零；
+                    var top =  startTop +  box[i].speedY;  //startTop = startTop + speendY 10 20 30 40 50 60;
+                    var left = startLeft + box[i].speedX;
+
+                    if(  left <= 0 || left >= maxX ){
+                        box[i].speedX = -box[i].speedX;  // 改变方向；
+                        if( left <= 0 ){
+                            left = 0
+                        }else if( left >= maxX ){
+                            left = maxX
+                        }
+                        box[i].style.background = changeBg();
+                    }
+
+                    //上下；
+                    if( top <= 0 || top >= maxY ){
+                        box[i].speedY = -box[i].speedY;  // 改变方向；
+                        if( top <= 0 ){
+                            top = 0
+                        }else if( top >= maxY ){
+                            top = maxY
+                        }
+                        box[i].style.background = changeBg();
+                    }
+                    box[i].style.top = top + "px";
+                    box[i].style.left = left + "px";
+                }
+                requestAnimationFrame( play )
+            }
+        }
+
+        //封装颜色的随机函数
+        function rand(){
+            return Math.floor(Math.random() * 256);
+        }
+        //封装改变颜色的函数
+        function changeBg(){
+            var r = rand();
+            var g = rand();
+            var b = rand();
+            return 'rgb('+ r +','+ g +','+ b +')';
+        }
+
+
+
+
+
+    </script>
+
+
+</body>
+</html>

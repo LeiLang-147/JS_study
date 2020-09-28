@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        while(true){
+            var s = +prompt("请输入一个数（ >0 ）：");
+            if(s > 0){
+                break;
+            }
+            alert("请输入一个合法的数！！！");
+        }
+        
+        //金字塔
+        document.write("金字塔" + "<br />");
+        document.write("<br />");
+        for(var i = 1; i <= s; i++){
+             for(var k = 1; k <= s - i; k++){
+                 document.write("&nbsp;&nbsp;&nbsp;");
+             }
+             for(var j = 1; j <= 2 * i - 1; j++){
+                 document.write("*&nbsp;&nbsp;");
+             }
+             document.write("<br />");
+         }
+
+
+
+    </script>
+</body>
+</html>

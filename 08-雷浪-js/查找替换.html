@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 500px;
+            padding: 20px;
+            border: 1px solid red;
+            margin: 50px auto;
+        }
+        input{
+            height: 20px;
+            outline: none;
+            vertical-align: middle;
+        }
+        button{
+            width: 50px;
+            height: 25px;
+            cursor: pointer;
+            vertical-align: middle;
+        }
+        i{
+            display: inline-block;
+            width: 30px;
+        }
+        p{
+            margin-top: 20px;
+        }
+        
+        .sp{
+            color: tomato;
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <input type="text" value="" placeholder="匹配项">
+        <button>查找</button>
+        <i></i>
+        <input type="text" value="" placeholder="替换项">
+        <button>替换</button>
+        <p>凯迪，出生于吉林长春，毕业于重庆大学美视电影学院表演系，中国内地女演员。
+            2008年凯迪参演家庭轻喜剧《把日子过好》；2010年参演法院题材剧《防线》；
+            2011年出演悬疑电影《密室之不可靠岸》；2014年参演爱情喜剧电影《撒娇女人最好命》；
+            2016年参演剧情悬疑电影《记忆大师》 [1]  ；2017年出演悬疑推理剧《白夜追凶》，
+            同年参演爱情奇幻剧《结爱·千岁大人的初恋》。</p>
+    </div>
+
+    
+    <script>
+        var input = document.getElementsByTagName("input");//输入框
+        var btn = document.getElementsByTagName("button");//按钮
+        var p = document.getElementsByTagName("p")[0];//p标签
+        var span = document.getElementsByTagName("span");//查找后添加的span
+        var str = p.innerText;
+        var str1;
+
+       //匹配
+        btn[0].onclick = function(){
+            if(input[0].value == ""){
+                alert("请输入要查询的内容！");
+                return false;
+            }
+            find(input[0].value);
+            p.innerHTML = str1;
+        };
+        //替换
+        btn[1].onclick = function(){
+            if(input[1].value == ""){
+                alert("请输入要替换的内容！");
+                return false;
+            }
+            change(input[1].value);
+            p.innerHTML = str;
+            //清除span
+            clearSpan(input[0].value);
+            input[0].value = "";
+            input[1].value = "";
+        };
+
+
+        function find(e){
+            var reg = new RegExp(e, 'g');
+            str1 = str.replace(reg, "<span class='sp'>" + e + "</span>");
+        };
+        
+
+        function change(e){
+            var reg = new RegExp(span[0].innerText, 'g');
+            str = str.replace(reg, "<span class='sp'>" + e + "</span>");
+        };
+
+        //清除span
+        function clearSpan(e){
+            var reg = new RegExp(/<span(?: [^>]*)?>/, "g");
+            str = str.replace(reg, "");
+        }
+        
+
+    </script>
+</body>
+</html>

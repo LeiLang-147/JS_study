@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .wrap{
+            width: 300px;
+            margin: 50px auto;
+        }
+        .wrap>div{
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            background-color: burlywood;
+            border-bottom: 1px solid #ffffff;
+        }
+        .wrap>div>span{
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            margin-right: 20px;
+            margin-left: 30px;
+            vertical-align: middle;
+            background-image: url(img/ck.png);
+        }
+        .wrap>div>span.change{
+            background-image: url(img/cked.jpg);
+        }
+        button{
+            width: 80px;
+            height: 30px;
+            cursor: pointer;
+            outline: none;
+            border: none;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div><span></span>item1</div>
+        <div><span></span>item2</div>
+        <div><span></span>item3</div>
+        <div><span></span>item4</div>
+        <div><span></span>item5</div>
+        <div><span></span>item6</div>
+        <div><span></span>item7</div>
+
+
+        <div style="text-align: center;">
+            <button onclick="getNum(0)">全选</button>
+            <button onclick="getNum(1)">全不选</button>
+            <button onclick="getNum(2)">反选</button>
+        </div>
+    </div>
+
+
+
+    <script>
+
+        var spans = document.getElementsByTagName("span");
+        var btn = document.getElementsByTagName("button");
+        //点击span框
+        for(var i = 0; i < spans.length; i++){
+            //spans[i].index = i;
+            spans[i].mark = false;
+            spans[i].onclick = function(){
+                if(this.mark){
+                    this.className = "";
+                }else{
+                    this.className = "change";
+                }
+                this.mark = !this.mark;
+            }
+        }
+        //点击按钮
+        function getNum(num){
+            for(var i = 0; i < spans.length; i++){
+                if(num == 0){
+                    spans[i].className = "change";
+                    spans[i].mark = true;
+                }else if(num == 1){
+                    spans[i].className = "";
+                    spans[i].mark = false;
+                }else{
+                    if(spans[i].mark){
+                        spans[i].className = "";
+                    }else{
+                        spans[i].className = "change";
+                    }
+                    spans[i].mark = !spans[i].mark;
+                }
+            }
+        }
+
+
+
+
+
+
+
+        
+/*         btn[0].onclick = function(){
+            for(var i = 0; i < spans.length; i++){
+                spans[i].className = "change";
+                spans[i].mark = true;
+            }
+        }
+        btn[1].onclick = function(){
+            for(var i = 0; i < spans.length; i++){
+                spans[i].className = "";
+                spans[i].mark = false;
+            }
+        }
+        btn[2].onclick = function(){
+            for(var i = 0; i < spans.length; i++){
+                if(spans[i].mark){
+                    spans[i].className = "";
+                }else{
+                    spans[i].className = "change";
+                }
+                spans[i].mark = !spans[i].mark;
+            }
+        } */
+
+
+
+
+    </script>
+</body>
+</html>

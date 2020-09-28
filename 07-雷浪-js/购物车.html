@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1858818_prftdkmvhe.css">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-size: 18px;
+            
+        }
+        body{
+            background-color: #CAD3C8;
+        }
+        h4{
+            width: 100px;
+            margin: 20px auto;
+            padding: 30px;
+        }
+        hr{
+            width: 1000px;
+            margin: auto;
+            border-top: none;
+            border-color: #aaaaaa;
+        }
+        ul{
+            width: 1000px;
+            height: 80px;
+            list-style: none;
+            margin: auto;
+            display: flex;
+            border-bottom: 1px solid #aaaaaa;
+        }
+        li{
+            width: 200px;
+            height: 80px;
+            line-height: 80px;
+            text-align: center;
+        }
+        li img{
+            width: 45px;
+            height: 45px;
+            margin-top: 17.5px;
+            margin-left: 20px;
+        }
+        i{
+            cursor: pointer;
+            font-weight: bold;
+            -webkit-user-select: none; 
+        }
+        i:hover{
+            color: #e84118;
+        }
+        .number{
+            display: inline-block;
+            width: 30px;
+        }
+        p{
+            width: 1000px;
+            margin:50px auto;
+            text-align: center;
+
+        }
+        button{
+            width: 80px;
+            outline: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+    <body>
+        <h4>购物清单</h4>
+        <hr>
+        <ul>
+            <li>
+                <img src="img/小米10.jpg" alt="">
+            </li>
+            <li>小米10</li>
+            <li>单价：<span class="price">3799</span>元</li>
+            <li>
+                <i class="iconfont iconiconset0187"></i>
+                <span class="number">0</span>
+                <i class="iconfont iconiconset0186"></i>
+            </li>
+            <li>小计：<span class="smallPrice">0</span>元</li>
+        </ul>
+        <ul>
+            <li>
+                <img src="img/小米手环5.jpg" alt="">
+            </li>
+            <li>小米手环5</li>
+            <li>单价：<span class="price">229</span>元</li>
+            <li>
+                <i class="iconfont iconiconset0187"></i>
+                <span class="number">0</span>
+                <i class="iconfont iconiconset0186"></i>
+            </li>
+            <li>小计：<span class="smallPrice">0</span>元</li>
+        </ul>
+        <ul>
+            <li>
+                <img src="img/小爱音响.jpg" alt="">
+            </li>
+            <li>小爱音响</li>
+            <li>单价：<span class="price">349</span>元</li>
+            <li>
+                <i class="iconfont iconiconset0187"></i>
+                <span class="number">0</span>
+                <i class="iconfont iconiconset0186"></i>
+            </li>
+            <li>小计：<span class="smallPrice">0</span>元</li>
+        </ul>
+        <p>
+            总数：<span id="lastNumber">0</span>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            总价：<span id="lastPrice">0</span>元
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button>去付款</button>
+        </p>
+    </body>
+
+    <script>
+
+
+        var add = document.getElementsByClassName("iconiconset0186");//加
+        var sub = document.getElementsByClassName("iconiconset0187");//减
+        sub[1].id = "";
+        var num = document.getElementsByClassName("number");//数量
+        var price = document.getElementsByClassName("price");//单价
+        var smallPrice = document.getElementsByClassName("smallPrice");//小计
+        var lastNumber = document.getElementById("lastNumber");//总量
+        var lastPrice = document.getElementById("lastPrice");//总价
+        
+        //加
+        for(var i=0 ; i<add.length ; i++){
+            add[i].index = i;
+            add[i].onclick = function(){
+                num[this.index].innerHTML++;
+                diaoyong(this.index);
+            }
+        }
+
+        //减
+        for(var i=0 ; i<sub.length ; i++){
+            sub[i].index = i;
+            sub[i].onclick = function(){
+                num[this.index].innerHTML--;
+                if(num[this.index].innerHTML < 0){
+                    num[this.index].innerHTML = 0;
+                }
+                diaoyong(this.index);
+            }
+        }
+
+        function diaoyong(a){
+            smallPrice[a].innerHTML = num[a].innerHTML * price[a].innerHTML;
+            var count1 = 0, count2 = 0;//每点一次，count就重新赋值，count = 0 + x
+            for(var j=0; j<add.length ; j++){
+                count1 += +num[j].innerHTML;
+                count2 += +smallPrice[j].innerHTML;
+            }
+            lastNumber.innerHTML = count1;
+            lastPrice.innerHTML = count2;
+        }
+
+
+    </script>
+</html>
